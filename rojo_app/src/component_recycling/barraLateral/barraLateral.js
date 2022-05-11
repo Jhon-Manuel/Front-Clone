@@ -1,8 +1,8 @@
-import React,{ useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { Component } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import './barraLateral.css';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Form } from 'react-bootstrap';
-import axios from 'axios';
+
 
 import Grafana from '../../assets/icon/icon-grafana.png';
 import DataDog from '../../assets/icon/data.png';
@@ -14,47 +14,16 @@ import la from '../../assets/icon/lista.png';
 import ta from '../../assets/icon/topologia.png';
 import aa from '../../assets/icon/alerta.png';
 
-import '../../component_recycling/barraLateral/barraLateral.css';
-import '../bemVindo/bemVindo.css';
-import '../../assets/css/animation__input.css';
-import '../cadastrarEquipamento/cadastroEquipamento.css';
-import '../../assets/css/style_search.css';
 import { parseJwt } from "../../services/auth";
-import './topologia.css';
+import React,{ useState, useEffect } from "react";
 
 
-export default function BemVindo() 
-{
+
+export default function BarraLateral () {
     var navigate = useNavigate();
-    
-    //States Usuario
-    const [usuario, setUsuario] = useState([]);
-    const [nome, setNome] = useState("");
-    const [cargo, setCargo] = useState("");
-    
-    const buscarUsuario = () =>
-    {
-        axios
-        .get('http://100.26.2.205/api/usuario/token')
 
-        .then(function (response) {
-            console.log('resposta' + response.data);
-            setUsuario(response.data)
-        })
-        .catch((erro) => console.log(erro))
-    }
-
-    useEffect(() => (buscarUsuario()),[])
-
-    const atualizarValores = () => 
-    {
-        setNome(usuario.slice(-2));
-        setCargo(usuario.slice(-3));
-        console.log("deu certo", usuario)  
-    }       
-        
-    useEffect(() => (atualizarValores()),[])
-
+    const [nome] = useState(parseJwt().nome);
+    const [cargo] = useState(parseJwt().cargo);
 
     const realizarLogout = async () => {
         try {
@@ -67,11 +36,8 @@ export default function BemVindo()
         }
       };
 
-
-    return(   
-        <div className="container-cadastro-equipamento">
-            
-                <div className="container-barra-esquerda">
+        return(
+            <div className="container-barra-esquerda">
                     <div className="barra-superior">
                         <nav  className="Logo">
                             <Link to="/"><img src={Logo} alt="Logo da Rojo"/></Link>
@@ -80,7 +46,6 @@ export default function BemVindo()
                             <Link to="/CadastrarEquipamento">
                                 <p className="cadastro-texto">
                                     CADASTRAR EQUIPAMENTO
-
                                 </p>
                                 <div className="cadastro-box-anime"/>         
                             </Link>
@@ -174,36 +139,6 @@ export default function BemVindo()
 
             
                 </div>
-            <div className="conteudo-equipamento">
+        )
+    }
 
-                <header>
-                    <h2 className="titulo">SEJA BEM VINDO</h2>
-                    <div className="search-form">
-                        <div className="lupa"/>
-                        <Form>
-                        <input
-                            name="country"
-                            label=" "
-                            placeholder="Procure por um equipamento"
-                        />
-                     
-                        </Form>
-                    </div>
-                </header>
-            
-                
-
-                <section>
-                        
-                <div className="container-info-equipamento">    
-                                    
-                    <div className="bem-vindo">INICIE CADASTRANDO UM NOVO EQUIPAMENTO DA SUA INFRAESTRUTURA</div>
-                                
-                                                
-                </div>
-                </section>
-    
-            </div>
-        </div>
-    );
-}

@@ -22,3 +22,16 @@
 .box-button1{
     background-image: url(../../assets/icon/reboot.png);
 }
+
+#btn-cadastrar-img{
+    height: 30px;
+    width: 30px;
+    background-image: url(../../assets/icon//btn-img.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: 2;
+    top:410px;
+    right: 260px;
+    border: none;
+}
