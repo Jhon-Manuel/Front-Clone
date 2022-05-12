@@ -57,7 +57,7 @@ export default function CadastroEquipamento() {
     const [porta, setPorta] = useState('');
     const [descricao, setDescricao] = useState('');
     const [data, setData] = useState(new Date())
-    const [condicao, setCondicao] = useState('');
+    const [condicao, setCondicao] = useState(false);
 
     const [tipo, setTipo] = useState(null);
     const [dadoEquipamento, setDadoEquipamento] =useState([]);
@@ -152,19 +152,29 @@ export default function CadastroEquipamento() {
     
     useEffect(() => (buscarTipoEquipamento()),[])
 
-         
-    function EventReboot(modalReboot){
-        modalReboot.classList.add('show');
-        // reboot.addEventListener('click', () => {
-        // });
+    function handleClickR(){
+        reboot.addEventListener(
+            reboot.classList.add('show')
+        );
+    }
+     
+    // function handleClickD(){
+    //     addEventListener(
+    //         classList.remove('show')
+    //     );
+    // }
+    // function EventReboot(modalReboot){
+    //     modalReboot.classList.add('show');
+    //     // reboot.addEventListener('click', () => {
+    //     // });
         
-    }
-    function EventClose(){
-        close.addEventListener('click', () => {
-            modal_reboot.classList.remove('show')
-        });
+    // }
+    // function EventClose(){
+    //     close.addEventListener('click', () => {
+    //         modal_reboot.classList.remove('show')
+    //     });
 
-    }
+    // }
     
     
         
@@ -199,6 +209,11 @@ export default function CadastroEquipamento() {
                                                                     
                                                                     <div className="form__div">
                                                                         <select
+                                                                            disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                             name="idTipoEquipamento"  
                                                                             value={idTipoEquipamento}   
                                                                             id="form__input_tipoEquipamento"      
@@ -224,6 +239,11 @@ export default function CadastroEquipamento() {
                                                                             autoComplete='off'
                                                                             placeholder=" "
                                                                             onChange={(event) => setModelo(event.target.value)}
+                                                                            disabled={
+                                                                                condicao === false
+                                                                                    ? 'none'
+                                                                                    : ''
+                                                                                }
                                                                         /> 
                                                                         <label className="form__label">
                                                                             Modelo
@@ -240,6 +260,11 @@ export default function CadastroEquipamento() {
                                                                         value={numeroDeSerie}
                                                                         placeholder=" "
                                                                         onChange={(event) => setNumeroDeSerie(event.target.value)}
+                                                                        disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                     />  
                                                                     <label className="form__label">
                                                                         Numero de Série
@@ -261,6 +286,11 @@ export default function CadastroEquipamento() {
                                                                         value={gateWay}
                                                                         placeholder=" "
                                                                         onChange={(event) => setGateWay(event.target.value)}
+                                                                        disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                     />
                                                                     <label className="form__label">
                                                                         GateWay
@@ -275,6 +305,11 @@ export default function CadastroEquipamento() {
                                                                         value={ip}
                                                                         placeholder=" "
                                                                         onChange={(event) => setIp(event.target.value)}
+                                                                        disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                     />
                                                                     <label className="form__label">
                                                                         Mask
@@ -289,6 +324,11 @@ export default function CadastroEquipamento() {
                                                                         value={dns}
                                                                         placeholder=" "
                                                                         onChange={(event) => setDns(event.target.value)}
+                                                                        disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                     />
                                                                     <label className="form__label">
                                                                         DNS
@@ -303,6 +343,11 @@ export default function CadastroEquipamento() {
                                                                         value={porta}
                                                                         placeholder=" "
                                                                         onChange={(event) => setPorta(event.target.value)}
+                                                                        disabled={
+                                                                            condicao === false
+                                                                                ? 'none'
+                                                                                : ''
+                                                                            }
                                                                     />
                                                                     <label className="form__label">
                                                                         Porta
@@ -326,6 +371,11 @@ export default function CadastroEquipamento() {
                                                                             value={descricao}
                                                                             placeholder=" "                                                                        
                                                                             onChange={(event) => setDescricao(event.target.value)}
+                                                                            disabled={
+                                                                                condicao === false
+                                                                                    ? 'none'
+                                                                                    : ''
+                                                                                }
                                                                     />                   
                                         
                                                                     <label className="form__label">
@@ -371,7 +421,7 @@ export default function CadastroEquipamento() {
 
                 <div className="sidebar">
                     <div className="s-c">
-                        <button id="btn-reboot" onClick={EventReboot} ><RestartAltIcon/></button>
+                        <button id="btn-reboot" onClick={handleClickR} ><RestartAltIcon/></button>
                         <button id="#configuration"><Settings/></button>
                         <button id="#connection"><PlayCircleIcon/></button>
                         <button id="#extra"><SettingsInputHdmiIcon/></button>
