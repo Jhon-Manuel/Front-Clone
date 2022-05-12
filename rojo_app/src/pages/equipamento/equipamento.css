@@ -2,7 +2,7 @@
     position: relative;
 }
 
-
+.box-img
 .container-button{
     position: absolute;
     z-index: 1;
@@ -34,4 +34,22 @@
     top:410px;
     right: 260px;
     border: none;
+}
+
+.box-img-equipamento{
+    width: 100%;
+    height: 200px;
+    background-image: url(../../assets/img/img-switch.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.box-img-equipamento.show{
+    width: 100%;
+    height: 200px;
+    /* background-image: url(../../assets/img/img-switch.jpg); */
+    background-size:cover;
+    background-repeat: no-repeat;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }

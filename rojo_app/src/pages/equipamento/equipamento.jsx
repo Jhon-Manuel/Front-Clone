@@ -63,18 +63,18 @@ export default function CadastroEquipamento() {
     const [dadoEquipamento, setDadoEquipamento] =useState([]);
     const [dadoTipoEquipamento, setDadoTipoEquipamento] = useState([]);
 
-
     const reboot = document.getElementById('btn-reboot');
     const modal_reboot = document.getElementById('reboot');
     const close = document.getElementById('close');
+    
     
     const imgAtual  = document.getElementById('')
 
     const upload = () => {   
         const formData = new FormData();
         formData.append(
-          'arquivo', //chave, nome do arquivo que será enviado.
-          this.state.arquivo, // valor, arquivo físico
+          'arquivo', 
+          arquivo,
         );
     
         axios
@@ -89,17 +89,17 @@ export default function CadastroEquipamento() {
 
     const buscarImagem = () => {
         axios('http://localhost:5000/api/perfils/imagem/bd', {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-          },
+        //   headers: {
+        //     Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //   },
         })
-          .catch((erro) => console.log(erro))
-          .then((resposta) => {
+        .then((resposta) => {
             if (resposta.status === 200) {
-              console.log(resposta);
-              this.setState({ imagem64: resposta.data });
+                console.log(resposta);
+                this.setState({ imagem64: resposta.data });
             }
-          });
+        })
+        .catch((erro) => console.log(erro))
       };
     
 
@@ -152,14 +152,22 @@ export default function CadastroEquipamento() {
     
     useEffect(() => (buscarTipoEquipamento()),[])
 
-    
-    // reboot.addEventListener('click', () => {
-    //     modal_reboot.classList.add('show');
-    // });
+         
+    function EventReboot(modalReboot){
+        modalReboot.classList.add('show');
+        // reboot.addEventListener('click', () => {
+        // });
+        
+    }
+    function EventClose(){
+        close.addEventListener('click', () => {
+            modal_reboot.classList.remove('show')
+        });
 
-    // close.addEventListener('click', () => {
-    //     modal_reboot.classList.remove('show')
-    // }); 
+    }
+    
+    
+        
     
     return(   
         <div className="container-cadastro-equipamento">
@@ -306,18 +314,9 @@ export default function CadastroEquipamento() {
 
                                                         </div>
                                                         <div className="container-img">
-                                                                {
-                                                                    exist === true && (
-                                                                        <div className="box-img" alt="imagem do equipamento"/>
-
-                                                                    )
-                                                                }
-                                                                {
-                                                                    exits === false && (
-                                                                        <div className="box-img" alt="imagem do equipamento"/>
-
-                                                                    )
-                                                                }
+                                                                
+                                                
+                                                                <div className="box-img-equipamento" alt="imagem do equipamento"/>
 
                                                                 <div className="form__div">    
                                                                     <textarea rows="6" cols="20" wrap="hard"
@@ -359,6 +358,8 @@ export default function CadastroEquipamento() {
                     </section>
         
                 </div>
+                <form encType="multipart/form-data">
+
                 <input id="btn-cadastrar-img" type="file"/>
                 {/* {
                     this.state.arquivo === null ?
@@ -366,10 +367,11 @@ export default function CadastroEquipamento() {
                      :
                      <button  className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro" onClick={this.upload} >Enviar! </button>
                 } */}
+                </form>
 
                 <div className="sidebar">
                     <div className="s-c">
-                        <button id="btn-reboot"><RestartAltIcon/></button>
+                        <button id="btn-reboot" onClick={EventReboot} ><RestartAltIcon/></button>
                         <button id="#configuration"><Settings/></button>
                         <button id="#connection"><PlayCircleIcon/></button>
                         <button id="#extra"><SettingsInputHdmiIcon/></button>
@@ -399,6 +401,7 @@ export default function CadastroEquipamento() {
                         <button id="close"><CloseIcon/></button>
                     </div>
                 </div>
+            
             </div>
         );
     }
